@@ -32,8 +32,32 @@ def listar_produtos():
 
 
 def atualizar_produto():
-    # TODO: atualizar produto pelo ID
-    pass
+    id_produto = int(input("Digite o ID do produto que deseja atualizar: "))
+
+    nome = input("Digite o novo nome: ")
+    descricao = input("Digite a nova descrição: ")
+    preco = float(input("Digite o novo preço: "))
+    categoria = input("Digite a nova categoria: ")
+
+    sql = """
+    UPDATE tbl_produtos
+    SET nome_produto = %s,
+        descricao_produto = %s,
+        preco_produto = %s,
+        categoria_produto = %s
+    WHERE id_produto = %s
+    """
+
+    valores = (nome, descricao, preco, categoria, id_produto)
+
+    cursor.execute(sql, valores)
+    conexao.commit()
+
+    if cursor.rowcount > 0:
+        print("Produto atualizado com sucesso!")
+    else:
+        print("Produto não encontrado.")
+    
 
 
 def excluir_produto():
