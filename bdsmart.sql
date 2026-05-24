@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS smart_stock;
 CREATE DATABASE smart_stock;
 USE smart_stock;
 
@@ -14,7 +15,7 @@ CREATE TABLE tbl_estoque (
    id_produto INT,
    quantidade_atual INT,
    quantidade_minima INT,
-   FOREIGN KEY (id_produto) REFERENCES tbl_produtos(id_produtos)
+   FOREIGN KEY (id_produto) REFERENCES tbl_produtos(id_produtos) ON DELETE CASCADE
 );
 
 CREATE TABLE tbl_venda (
@@ -29,8 +30,8 @@ CREATE TABLE tbl_item_venda (
    id_produto INT,
    quantidade_itens INT,
    preco_unitario DECIMAL (10,2),
-   FOREIGN KEY (id_venda) REFERENCES tbl_venda(id_venda),
-   FOREIGN KEY (id_produto) REFERENCES tbl_produtos(id_produtos)
+   FOREIGN KEY (id_venda) REFERENCES tbl_venda(id_venda) ON DELETE CASCADE,
+   FOREIGN KEY (id_produto) REFERENCES tbl_produtos(id_produtos) ON DELETE CASCADE
 );
 
 CREATE TABLE tbl_fornecedor (
@@ -39,4 +40,14 @@ CREATE TABLE tbl_fornecedor (
    telefone_fornecedor VARCHAR (50),
    email_fornecedor VARCHAR (100),
    endereco_fornecedor VARCHAR (100)
+);
+
+CREATE TABLE tbl_lotes (
+   id_lote INT AUTO_INCREMENT PRIMARY KEY,
+   id_produto INT,
+   numero_lote VARCHAR(50) NOT NULL,
+   quantidade_lote INT NOT NULL,
+   data_validade DATE NULL,
+   data_entrada DATE NOT NULL,
+   FOREIGN KEY (id_produto) REFERENCES tbl_produtos(id_produtos) ON DELETE CASCADE
 );
