@@ -2,7 +2,6 @@ import sys
 import mysql.connector
 from datetime import date
 
-# Configura encoding do terminal para suportar emojis no Windows
 try:
     sys.stdout.reconfigure(encoding='utf-8')
 except AttributeError:

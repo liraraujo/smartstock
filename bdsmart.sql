@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS smart_stock;
 CREATE DATABASE smart_stock;
 USE smart_stock;
 
